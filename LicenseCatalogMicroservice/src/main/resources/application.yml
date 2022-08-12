@@ -4,6 +4,8 @@ server:
 spring:
   application:
     name: LICENSE-MANAGEMENT
+  zipkin:
+    base-url: http://127.0.0.1:9411/
 
 eureka:
   client:
