@@ -1,0 +1,25 @@
+version: '3'
+services:
+  my-sql-standalone:
+    image: 'mysql:5.7'
+    environment:
+      - MYSQL_ROOT_PASSWORD= root
+      - MYSQL_PASSWORD= Cranium@6239929179
+      - MYSQL_DATABASE= ms_corporate
+    ports:
+      - "3307:3306"
+    restart: always
+  springboot-docker-container:
+    image: springboot-docker-container
+    ports:
+     - "9002:9002"
+    restart: always
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/ms_corporate
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: Cranium@6239929179
+    build:
+      context: "./"
+      dockerfile: "Dockerfile"
+    depends_on:
+      - my-sql-standalone
